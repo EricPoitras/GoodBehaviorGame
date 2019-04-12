@@ -204,14 +204,17 @@ $(document).ready(function(){
     })*/
     
     $("#btn_login").click(function(){
-         username = $("#input_username").val();
-         classname = $("#input_class").val();
          //$("title").text(username);
          //$(".navbar-brand").html("<img src='assets/logo.svg' width='75' height='75' alt=''>Behavioral Management: "+classname);
          //listofbehaviors = JSON.stringify($("#listbehaviors").html());
          //listofbehaviorsdisplay = JSON.stringify($("#listbehaviorsdisplay").html());
          //console.log("List of behavior in string format :"+listofbehaviors);
          handleSignInClick();
+    });
+    
+    $("#btn_start").click(function(){
+         username = $("#input_username").val();
+         classname = $("#input_class").val();
          updatelocalstorage();
          document.getElementById("landing").classList.add("d-none");
          document.getElementById("navbar").classList.remove("d-none");
