@@ -30,9 +30,7 @@ function makeApiCall() {
       request.then(function(response) {
         // TODO: Change code below to process the `response` object:
         console.log(response.result);
-        handleSignOutClick();
-         clearlocalstorage();
-         location.reload();
+        
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
       });

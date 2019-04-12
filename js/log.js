@@ -102,7 +102,8 @@ function datalogger(categorylabel, eventlabel, qualifierlabel){
     
     // Log research data to MySQL database - lab evaluation EP 11 10 2018
     //$.post("admin/researchlog.php",{logtimestamp: n, logtimer: timer, logcounter: counter, logwebpage: docurl, loglabel: JSON.stringify(newitem)});
-    sessionStorage.batch_log = sessionStorage.batch_log + "\n" + "logtimestamp" + "," + n + "," + "logtimer" + "," + timer + "," + "logcounter" + "," + counter + "," + "logwebpage" + "," + docurl + "," + "loglabel" + "," + JSON.stringify(newitem);  
+    sessionStorage.batch_log = "logtimestamp" + "," + n + "," + "logtimer" + "," + timer + "," + "logcounter" + "," + counter + "," + "logwebpage" + "," + docurl + "," + "loglabel" + "," + JSON.stringify(newitem);
+    makeApiCall();
 }
 
 // Event Handlers
@@ -124,7 +125,7 @@ $(document).on("click","button, a, textarea",function(){
     refreshloggervalues();
     datalogger("ClickEvent",elementdescription,elementType);
 });
-
+/*
 $(document).on("dblclick","button, a, textarea",function(){
     var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
     var elementdescription = element.substring(0,500);
@@ -188,3 +189,4 @@ $(document).on("change paste keyup","textarea, input",function(){
     refreshloggervalues();
     datalogger("InputEvent",elementvalue,elementcontent);
 });
+*/
