@@ -226,8 +226,8 @@ $(document).ready(function(){
          $("#input_class").val(classname);
          //$("title").text(username);
          //$(".navbar-brand").html("<img src='assets/logo.svg' width='75' height='75' alt=''>Behavioral Management: "+classname);
-         clearlocalstorage();
-         location.reload();
+         makeApiCall();
+        
     });
     
     /*$("#closebutton, .close").click(function(){
