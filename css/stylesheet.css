@@ -1,0 +1,33 @@
+nav.navbar{
+    background-color: white;
+}
+body{
+    background-color: lightgray;
+}
+.card{
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+#listbehaviors i, #user, #form, #settings, #signout{
+    color: lightgray;
+}
+#listbehaviors i:hover, #user:hover, #form:hover, #settings:hover, #signout:hover{
+    color: gray;
+}
+#game{
+    height: calc(100vh - 50px);
+}
+#card_class .card-body{
+    padding-top: 10px;
+    padding-bottom: 0px;
+}
+#card_behavior .card-body{
+    overflow-y: scroll;
+    height: 175px;
+}
+#card_graph .card-body{
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 10px;
+    padding-top: 0px;
+}
