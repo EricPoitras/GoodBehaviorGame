@@ -117,13 +117,91 @@ $(window).on("unload",function(){
     refreshloggervalues();
     datalogger("NavigationEvent","DocumentUnload","N/A");
 });
-
-$(document).on("click","button, a, textarea",function(){
+/*
+$(document).on("click","button, a",function(){
     var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
     var elementdescription = element.substring(0,500);
     var elementType = $(this).prop('nodeName');
     refreshloggervalues();
     datalogger("ClickEvent",elementdescription,elementType);
+});*/
+
+$(document).on("click","#btn_login",function(){
+    var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
+    var elementdescription = element.substring(0,500);
+    var elementType = $(this).prop('nodeName');
+    refreshloggervalues();
+    datalogger("ClickEvent",elementdescription,"login");
+});
+$(document).on("click","#btn_start",function(){
+    var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
+    var elementdescription = element.substring(0,500);
+    var elementType = $(this).prop('nodeName');
+    refreshloggervalues();
+    datalogger("ClickEvent",elementdescription,"start");
+});
+$(document).on("click","#signout",function(){
+    var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
+    var elementdescription = element.substring(0,500);
+    var elementType = $(this).prop('nodeName');
+    refreshloggervalues();
+    datalogger("ClickEvent",elementdescription,"signout");
+});
+$(document).on("click","#settings",function(){
+    var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
+    var elementdescription = element.substring(0,500);
+    var elementType = $(this).prop('nodeName');
+    refreshloggervalues();
+    datalogger("ClickEvent",elementdescription,"settings");
+});
+$(document).on("click","#2_groups",function(){
+    var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
+    var elementdescription = element.substring(0,500);
+    var elementType = $(this).prop('nodeName');
+    refreshloggervalues();
+    datalogger("ClickEvent",elementdescription,"2_groups");
+});
+$(document).on("click","#3_groups",function(){
+    var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
+    var elementdescription = element.substring(0,500);
+    var elementType = $(this).prop('nodeName');
+    refreshloggervalues();
+    datalogger("ClickEvent",elementdescription,"3_groups");
+});
+$(document).on("click","#addbehavior",function(){
+    var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
+    var elementdescription = element.substring(0,500);
+    var elementType = $(this).prop('nodeName');
+    refreshloggervalues();
+    datalogger("ClickEvent",elementdescription,"addbehavior");
+});
+$(document).on("click","#querysubmitbutton",function(){
+    var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
+    var elementdescription = element.substring(0,500);
+    var elementType = $(this).prop('nodeName');
+    refreshloggervalues();
+    datalogger("ClickEvent",elementdescription,"querysubmitbutton");
+});
+$(document).on("click","#tigerbutton",function(){
+    var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
+    var elementdescription = element.substring(0,500);
+    var elementType = $(this).prop('nodeName');
+    refreshloggervalues();
+    datalogger("ClickEvent",elementdescription,"tigerbutton");
+});
+$(document).on("click","#hippobutton",function(){
+    var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
+    var elementdescription = element.substring(0,500);
+    var elementType = $(this).prop('nodeName');
+    refreshloggervalues();
+    datalogger("ClickEvent",elementdescription,"hippobutton");
+});
+$(document).on("click","#monkeybutton",function(){
+    var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
+    var elementdescription = element.substring(0,500);
+    var elementType = $(this).prop('nodeName');
+    refreshloggervalues();
+    datalogger("ClickEvent",elementdescription,"monkeybutton");
 });
 /*
 $(document).on("dblclick","button, a, textarea",function(){
@@ -182,10 +260,31 @@ $(document).on("touchend","input",function(){
     datalogger("TouchEnd",elementdescription,elementType);
 });
 */
-$(document).on("change","textarea, input",function(){
+$(document).on("change","#input_username",function(){
     var elementvalue = $(this).val();
     //var elementdescription = elementvalue.toString().substring(0,500);
     var elementcontent = $(this).prop('nodeName');
     refreshloggervalues();
-    datalogger("InputEvent",elementvalue,elementcontent);
+    datalogger("InputEvent",elementvalue,"username");
+});
+$(document).on("change","#input_class",function(){
+    var elementvalue = $(this).val();
+    //var elementdescription = elementvalue.toString().substring(0,500);
+    var elementcontent = $(this).prop('nodeName');
+    refreshloggervalues();
+    datalogger("InputEvent",elementvalue,"class");
+});
+$(document).on("change","#inputBehavior",function(){
+    var elementvalue = $(this).val();
+    //var elementdescription = elementvalue.toString().substring(0,500);
+    var elementcontent = $(this).prop('nodeName');
+    refreshloggervalues();
+    datalogger("InputEvent",elementvalue,"inputbehavior");
+});
+$(document).on("change","#q",function(){
+    var elementvalue = $(this).val();
+    //var elementdescription = elementvalue.toString().substring(0,500);
+    var elementcontent = $(this).prop('nodeName');
+    refreshloggervalues();
+    datalogger("InputEvent",elementvalue,"q");
 });
