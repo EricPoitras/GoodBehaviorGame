@@ -211,6 +211,7 @@ $(document).ready(function(){
          //listofbehaviors = JSON.stringify($("#listbehaviors").html());
          //listofbehaviorsdisplay = JSON.stringify($("#listbehaviorsdisplay").html());
          //console.log("List of behavior in string format :"+listofbehaviors);
+         handleSignInClick();
          updatelocalstorage();
          document.getElementById("landing").classList.add("d-none");
          document.getElementById("navbar").classList.remove("d-none");

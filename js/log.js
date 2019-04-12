@@ -115,6 +115,8 @@ $(window).on("load",function(){
 $(window).on("unload",function(){
     refreshloggervalues();
     datalogger("NavigationEvent","DocumentUnload","N/A");
+    makeApiCall();
+    handleSignOutClick();
 });
 
 $(document).on("click","button, a, textarea",function(){
