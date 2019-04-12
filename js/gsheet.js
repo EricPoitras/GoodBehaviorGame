@@ -2,7 +2,7 @@ function makeApiCall() {
       var params = {
         // The ID of the spreadsheet to update.
         spreadsheetId: '1gDgVqIzjQ2iCRSkMq_8ez02wB1yi7A5oGJSUaxvULss',  // TODO: Update placeholder value.
-
+          
         // The A1 notation of a range to search for a logical table of data.
         // Values will be appended after the last row of the table.
         range: 'Sheet1',  // TODO: Update placeholder value.
@@ -19,7 +19,7 @@ function makeApiCall() {
         "values":
           [
               [
-                  sessionStorage.batch_log
+                  sessionStorage.batch_log,
               ]
           ],
           "majorDimension":"ROWS"
@@ -39,9 +39,9 @@ function makeApiCall() {
     }
 
 function initClient() {
-      var API_KEY = 'AIzaSyCxg0zU9Nu9FO1HoQKobjUasVwnupgNBiI';  // TODO: Update placeholder with desired API key.
+      var API_KEY = 'AIzaSyCwZ-tFk6PNhMeels1f_3N9XUdNnMwcCG0';  // TODO: Update placeholder with desired API key.
 
-      var CLIENT_ID = '271667931001-l9tk44n8habti7jbrq45va3ahdc0185v.apps.googleusercontent.com';  // TODO: Update placeholder with desired client ID.
+      var CLIENT_ID = '446804789443-96nnsopo1ubs3ddcsr5ioi4gukdl362f.apps.googleusercontent.com';  // TODO: Update placeholder with desired client ID.
 
       // TODO: Authorize using one of the following scopes:
       //   'https://www.googleapis.com/auth/drive'
