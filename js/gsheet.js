@@ -66,7 +66,11 @@ function handleClientLoad() {
 
 function updateSignInStatus(isSignedIn) {
       if (isSignedIn) {
-        makeApiCall();
+        document.getElementById("form_getstarted").classList.remove("d-none");
+        document.getElementById("btn_start").classList.remove("d-none");
+        document.getElementById("btn_login").classList.add("d-none");
+        console.log("Signed In confirmed");
+        //makeApiCall();
       }
     }
 

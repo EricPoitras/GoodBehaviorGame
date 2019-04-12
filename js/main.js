@@ -127,6 +127,14 @@ $(document).ready(function(){
     
     setdatafromlocalstorage();
     
+    /*if(localStorage.SignStatus === "Signed In"){
+        document.getElementById("form_getstarted").classList.remove("d-none");
+        document.getElementById("btn_start").classList.remove("d-none");
+        document.getElementById("btn_login").classList.add("d-none");
+    }else{
+        // Default appearance - Sign in required
+    }*/
+    
     // Sign in username and classname - no account required
     //$('#Modal').modal('show');
     
@@ -209,6 +217,7 @@ $(document).ready(function(){
          //listofbehaviors = JSON.stringify($("#listbehaviors").html());
          //listofbehaviorsdisplay = JSON.stringify($("#listbehaviorsdisplay").html());
          //console.log("List of behavior in string format :"+listofbehaviors);
+        //localStorage.SignStatus = "Signed In";
          handleSignInClick();
     });
     
