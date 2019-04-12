@@ -19,7 +19,7 @@ function makeApiCall() {
         "values":
           [
               [
-                  sessionStorage.batch_log,
+                  sessionStorage.batch_log
               ]
           ],
           "majorDimension":"ROWS"
