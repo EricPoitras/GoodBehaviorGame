@@ -181,12 +181,11 @@ $(document).on("touchend","input",function(){
     refreshloggervalues();
     datalogger("TouchEnd",elementdescription,elementType);
 });
-
-$(document).on("change paste keyup","textarea, input",function(){
+*/
+$(document).on("change","textarea, input",function(){
     var elementvalue = $(this).val();
     //var elementdescription = elementvalue.toString().substring(0,500);
     var elementcontent = $(this).prop('nodeName');
     refreshloggervalues();
     datalogger("InputEvent",elementvalue,elementcontent);
 });
-*/
