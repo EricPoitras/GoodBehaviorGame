@@ -6,70 +6,68 @@
 
 var client, streamClient;
 window.init = function(token) {
-  
-  if (streamClient) {
-    streamClient.close();
-  }
-  
-  client = new ApiAi.ApiAiClient({accessToken: "9826bcc2754040bd8562913faa17a945", streamClientClass: ApiAi.ApiAiStreamClient});
-  
-  streamClient = client.createStreamClient();
-  console.log(client.createStreamClient());
-  streamClient.init();
+	if (streamClient) {
+		streamClient.close();
+	}
 
-  streamClient.onInit = function() {
-    console.log("> ON INIT use direct assignment property");
-    streamClient.open();
-  };
+	client = new ApiAi.ApiAiClient({ accessToken: "e6c9f80d0b6b49a38f6e80406495c2ab", streamClientClass: ApiAi.ApiAiStreamClient });
 
-  streamClient.onStartListening = function() {
-    console.log("> ON START LISTENING");
-  };
+	streamClient = client.createStreamClient();
+	console.log(client.createStreamClient());
+	streamClient.init();
 
-  streamClient.onStopListening = function() {
-    console.log("> ON STOP LISTENING");
-  };
+	streamClient.onInit = function() {
+		console.log("> ON INIT use direct assignment property");
+		streamClient.open();
+	};
 
-  streamClient.onOpen = function() {
-    console.log("> ON OPEN SESSION");
-  };
+	streamClient.onStartListening = function() {
+		console.log("> ON START LISTENING");
+	};
 
-  streamClient.onClose = function() {
-    console.log("> ON CLOSE");
-    streamClient.close();
-  };
+	streamClient.onStopListening = function() {
+		console.log("> ON STOP LISTENING");
+	};
 
-  streamClient.onResults = streamClientOnResults;
+	streamClient.onOpen = function() {
+		console.log("> ON OPEN SESSION");
+	};
 
-  streamClient.onError = function(code, data) {
-    streamClient.close();
-    console.log("> ON ERROR", code, data);
-  };
+	streamClient.onClose = function() {
+		console.log("> ON CLOSE");
+		streamClient.close();
+	};
 
-  streamClient.onEvent = function(code, data) {
-    console.log("> ON EVENT", code, data);
-  };
-}
+	streamClient.onResults = streamClientOnResults;
 
+	streamClient.onError = function(code, data) {
+		streamClient.close();
+		console.log("> ON ERROR", code, data);
+	};
+
+	streamClient.onEvent = function(code, data) {
+		console.log("> ON EVENT", code, data);
+	};
+};
 
 // streamClient events definitions
 
 function sendText(text) {
-  return client.textRequest(text);
+	return client.textRequest(text);
 }
 
 function tts(text) {
-  return client.ttsRequest(text);
+	return client.ttsRequest(text);
 }
 
 function startMic() {
-  streamClient.startListening();
+	streamClient.startListening();
 }
 
 function stopMic() {
-  streamClient.stopListening();
+	streamClient.stopListening();
 }
 
 function streamClientOnResults(results) {
-  console.log("> ON RESULTS", results);
+	console.log("> ON RESULTS", results);
 }

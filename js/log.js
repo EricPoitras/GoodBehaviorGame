@@ -3,18 +3,18 @@
 // Variables
 var logdata;
 
-var docurl = '';
-var d = '';
-var n = '';
+var docurl = "";
+var d = "";
+var n = "";
 
-var docheight = '';
-var docwidth = '';
-var deviceheight = '';
-var devicewidth = '';
-var bodyheight = '';
-var bodywidth = '';
-var pagexoffset = '';
-var pageyoffset = '';
+var docheight = "";
+var docwidth = "";
+var deviceheight = "";
+var devicewidth = "";
+var bodyheight = "";
+var bodywidth = "";
+var pagexoffset = "";
+var pageyoffset = "";
 
 var counter = 0;
 var timer = 0;
@@ -22,100 +22,99 @@ var timer = 0;
 // Functions
 
 //Session identifier
-function setsessionid(){
-    if (sessionStorage.getItem("sessionid") === null) {
-        var sessionid = Math.floor(Math.random()*1000000000001);
-        sessionStorage.sessionid = sessionid;
-        sessionStorage.batch_log = "";
-    } 
+function setsessionid() {
+	if (sessionStorage.getItem("sessionid") === null) {
+		var sessionid = Math.floor(Math.random() * 1000000000001);
+		sessionStorage.sessionid = sessionid;
+		sessionStorage.batch_log = "";
+	}
 }
 
 //Setting document url
-function setvariables(){
-    //Get document url
-    docurl = document.URL;
-    //Get timestamp
-    d = new Date();
-    n = d.toUTCString();
+function setvariables() {
+	//Get document url
+	docurl = document.URL;
+	//Get timestamp
+	d = new Date();
+	n = d.toUTCString();
 }
 
 //Setting screen variables
-function setscreenvariables(){
-    //Viewport size
-    docheight = document.documentElement.clientHeight;
-    docwidth = document.documentElement.clientWidth;
-    //Device size
-    deviceheight = window.screen.height;
-    devicewidth = window.screen.width;
-    //Document size
-    bodyheight = document.body.clientHeight;
-    bodywidth = document.body.clientWidth;
-    //Pixel number scrolled from upper left corner of the document, horizontally and vertically
-    pagexoffset = window.pageXOffset;
-    pageyoffset = window.pageYOffset;
+function setscreenvariables() {
+	//Viewport size
+	docheight = document.documentElement.clientHeight;
+	docwidth = document.documentElement.clientWidth;
+	//Device size
+	deviceheight = window.screen.height;
+	devicewidth = window.screen.width;
+	//Document size
+	bodyheight = document.body.clientHeight;
+	bodywidth = document.body.clientWidth;
+	//Pixel number scrolled from upper left corner of the document, horizontally and vertically
+	pagexoffset = window.pageXOffset;
+	pageyoffset = window.pageYOffset;
 }
 
 //Counter of logged events
-function incrementcounter(){
-    //Set counter
-    counter += 1;
+function incrementcounter() {
+	//Set counter
+	counter += 1;
 }
 
-function settimer(){
-    timer += 0.1;
+function settimer() {
+	timer += 0.1;
 }
 
 setInterval("settimer()", 100);
 
-function refreshloggervalues(){
-    setsessionid();
-    setvariables();
-    setscreenvariables();
-    incrementcounter();
+function refreshloggervalues() {
+	setsessionid();
+	setvariables();
+	setscreenvariables();
+	incrementcounter();
 }
 
 // Data Logging Function
-function datalogger(categorylabel, eventlabel, qualifierlabel){
-    
-    var newitem = {
-        session: sessionStorage.sessionid,
-        username: localStorage.UTTECusername,
-        classname: localStorage.classname,
-        timestamp: n,
-        timer: timer,
-        counter: counter,
-        page: docurl,
-        docheight: docheight,
-        docwidth: docwidth,
-        deviceheight: deviceheight,
-        devicewidth: devicewidth,
-        bodyheight: bodyheight,
-        bodywidth: bodywidth,
-        pagexoffset: pagexoffset,
-        pageyoffset: pageyoffset,
-        category: categorylabel,
-        event: eventlabel, 
-        qualifier: qualifierlabel
-    };
-    
-    localStorage.sessionlog = JSON.stringify(newitem);
-    
-    // Log research data to MySQL database - lab evaluation EP 11 10 2018
-    //$.post("admin/researchlog.php",{logtimestamp: n, logtimer: timer, logcounter: counter, logwebpage: docurl, loglabel: JSON.stringify(newitem)});
-    sessionStorage.batch_log = "logtimestamp" + "," + n + "," + "logtimer" + "," + timer + "," + "logcounter" + "," + counter + "," + "logwebpage" + "," + docurl + "," + "loglabel" + "," + JSON.stringify(newitem);
-    makeApiCall();
+function datalogger(categorylabel, eventlabel, qualifierlabel) {
+	var newitem = {
+		session: sessionStorage.sessionid,
+		username: localStorage.UTTECusername,
+		classname: localStorage.classname,
+		timestamp: n,
+		timer: timer,
+		counter: counter,
+		page: docurl,
+		docheight: docheight,
+		docwidth: docwidth,
+		deviceheight: deviceheight,
+		devicewidth: devicewidth,
+		bodyheight: bodyheight,
+		bodywidth: bodywidth,
+		pagexoffset: pagexoffset,
+		pageyoffset: pageyoffset,
+		category: categorylabel,
+		event: eventlabel,
+		qualifier: qualifierlabel
+	};
+
+	localStorage.sessionlog = JSON.stringify(newitem);
+
+	// Log research data to MySQL database - lab evaluation EP 11 10 2018
+	//$.post("admin/researchlog.php",{logtimestamp: n, logtimer: timer, logcounter: counter, logwebpage: docurl, loglabel: JSON.stringify(newitem)});
+	sessionStorage.batch_log = "logtimestamp" + "," + n + "," + "logtimer" + "," + timer + "," + "logcounter" + "," + counter + "," + "logwebpage" + "," + docurl + "," + "loglabel" + "," + JSON.stringify(newitem);
+	makeApiCall();
 }
 
 // Event Handlers
 
-$(window).on("load",function(){
-    refreshloggervalues();
-    datalogger("NavigationEvent","DocumentLoad","N/A");
+$(window).on("load", function() {
+	refreshloggervalues();
+	datalogger("NavigationEvent", "DocumentLoad", "N/A");
 });
 
-$(window).on("unload",function(){
-    refreshloggervalues();
-    datalogger("NavigationEvent","DocumentUnload","N/A");
+$(window).on("unload", function() {
+	refreshloggervalues();
+	datalogger("NavigationEvent", "DocumentUnload", "N/A");
 });
 /*
 $(document).on("click","button, a",function(){
@@ -126,82 +125,104 @@ $(document).on("click","button, a",function(){
     datalogger("ClickEvent",elementdescription,elementType);
 });*/
 
-$(document).on("click","#btn_login",function(){
-    var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
-    var elementdescription = element.substring(0,500);
-    var elementType = $(this).prop('nodeName');
-    refreshloggervalues();
-    datalogger("ClickEvent",elementdescription,"login");
+$(document).on("click", "#btn_login", function() {
+	var element = $(this)
+		.html()
+		.replace(/\r?\n|\r|\s|["']/g, "");
+	var elementdescription = element.substring(0, 500);
+	var elementType = $(this).prop("nodeName");
+	refreshloggervalues();
+	datalogger("ClickEvent", elementdescription, "login");
 });
-$(document).on("click","#btn_start",function(){
-    var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
-    var elementdescription = element.substring(0,500);
-    var elementType = $(this).prop('nodeName');
-    refreshloggervalues();
-    datalogger("ClickEvent",elementdescription,"start");
+$(document).on("click", "#btn_start", function() {
+	var element = $(this)
+		.html()
+		.replace(/\r?\n|\r|\s|["']/g, "");
+	var elementdescription = element.substring(0, 500);
+	var elementType = $(this).prop("nodeName");
+	refreshloggervalues();
+	datalogger("ClickEvent", elementdescription, "start");
 });
-$(document).on("click","#signout",function(){
-    var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
-    var elementdescription = element.substring(0,500);
-    var elementType = $(this).prop('nodeName');
-    refreshloggervalues();
-    datalogger("ClickEvent",elementdescription,"signout");
+$(document).on("click", "#signout", function() {
+	var element = $(this)
+		.html()
+		.replace(/\r?\n|\r|\s|["']/g, "");
+	var elementdescription = element.substring(0, 500);
+	var elementType = $(this).prop("nodeName");
+	refreshloggervalues();
+	datalogger("ClickEvent", elementdescription, "signout");
 });
-$(document).on("click","#settings",function(){
-    var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
-    var elementdescription = element.substring(0,500);
-    var elementType = $(this).prop('nodeName');
-    refreshloggervalues();
-    datalogger("ClickEvent",elementdescription,"settings");
+$(document).on("click", "#settings", function() {
+	var element = $(this)
+		.html()
+		.replace(/\r?\n|\r|\s|["']/g, "");
+	var elementdescription = element.substring(0, 500);
+	var elementType = $(this).prop("nodeName");
+	refreshloggervalues();
+	datalogger("ClickEvent", elementdescription, "settings");
 });
-$(document).on("click","#2_groups",function(){
-    var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
-    var elementdescription = element.substring(0,500);
-    var elementType = $(this).prop('nodeName');
-    refreshloggervalues();
-    datalogger("ClickEvent",elementdescription,"2_groups");
+$(document).on("click", "#2_groups", function() {
+	var element = $(this)
+		.html()
+		.replace(/\r?\n|\r|\s|["']/g, "");
+	var elementdescription = element.substring(0, 500);
+	var elementType = $(this).prop("nodeName");
+	refreshloggervalues();
+	datalogger("ClickEvent", elementdescription, "2_groups");
 });
-$(document).on("click","#3_groups",function(){
-    var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
-    var elementdescription = element.substring(0,500);
-    var elementType = $(this).prop('nodeName');
-    refreshloggervalues();
-    datalogger("ClickEvent",elementdescription,"3_groups");
+$(document).on("click", "#3_groups", function() {
+	var element = $(this)
+		.html()
+		.replace(/\r?\n|\r|\s|["']/g, "");
+	var elementdescription = element.substring(0, 500);
+	var elementType = $(this).prop("nodeName");
+	refreshloggervalues();
+	datalogger("ClickEvent", elementdescription, "3_groups");
 });
-$(document).on("click","#addbehavior",function(){
-    var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
-    var elementdescription = element.substring(0,500);
-    var elementType = $(this).prop('nodeName');
-    refreshloggervalues();
-    datalogger("ClickEvent",elementdescription,"addbehavior");
+$(document).on("click", "#addbehavior", function() {
+	var element = $(this)
+		.html()
+		.replace(/\r?\n|\r|\s|["']/g, "");
+	var elementdescription = element.substring(0, 500);
+	var elementType = $(this).prop("nodeName");
+	refreshloggervalues();
+	datalogger("ClickEvent", elementdescription, "addbehavior");
 });
-$(document).on("click","#querysubmitbutton",function(){
-    var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
-    var elementdescription = element.substring(0,500);
-    var elementType = $(this).prop('nodeName');
-    refreshloggervalues();
-    datalogger("ClickEvent",elementdescription,"querysubmitbutton");
+$(document).on("click", "#querysubmitbutton", function() {
+	var element = $(this)
+		.html()
+		.replace(/\r?\n|\r|\s|["']/g, "");
+	var elementdescription = element.substring(0, 500);
+	var elementType = $(this).prop("nodeName");
+	refreshloggervalues();
+	datalogger("ClickEvent", elementdescription, "querysubmitbutton");
 });
-$(document).on("click","#tigerbutton",function(){
-    var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
-    var elementdescription = element.substring(0,500);
-    var elementType = $(this).prop('nodeName');
-    refreshloggervalues();
-    datalogger("ClickEvent",elementdescription,"tigerbutton");
+$(document).on("click", "#tigerbutton", function() {
+	var element = $(this)
+		.html()
+		.replace(/\r?\n|\r|\s|["']/g, "");
+	var elementdescription = element.substring(0, 500);
+	var elementType = $(this).prop("nodeName");
+	refreshloggervalues();
+	datalogger("ClickEvent", elementdescription, "tigerbutton");
 });
-$(document).on("click","#hippobutton",function(){
-    var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
-    var elementdescription = element.substring(0,500);
-    var elementType = $(this).prop('nodeName');
-    refreshloggervalues();
-    datalogger("ClickEvent",elementdescription,"hippobutton");
+$(document).on("click", "#hippobutton", function() {
+	var element = $(this)
+		.html()
+		.replace(/\r?\n|\r|\s|["']/g, "");
+	var elementdescription = element.substring(0, 500);
+	var elementType = $(this).prop("nodeName");
+	refreshloggervalues();
+	datalogger("ClickEvent", elementdescription, "hippobutton");
 });
-$(document).on("click","#monkeybutton",function(){
-    var element = $(this).html().replace(/\r?\n|\r|\s|["']/g,"");
-    var elementdescription = element.substring(0,500);
-    var elementType = $(this).prop('nodeName');
-    refreshloggervalues();
-    datalogger("ClickEvent",elementdescription,"monkeybutton");
+$(document).on("click", "#monkeybutton", function() {
+	var element = $(this)
+		.html()
+		.replace(/\r?\n|\r|\s|["']/g, "");
+	var elementdescription = element.substring(0, 500);
+	var elementType = $(this).prop("nodeName");
+	refreshloggervalues();
+	datalogger("ClickEvent", elementdescription, "monkeybutton");
 });
 /*
 $(document).on("dblclick","button, a, textarea",function(){
@@ -260,27 +281,28 @@ $(document).on("touchend","input",function(){
     datalogger("TouchEnd",elementdescription,elementType);
 });
 */
-$(document).on("change","#input_username",function(){
-    var elementvalue = $(this).val();
-    //var elementdescription = elementvalue.toString().substring(0,500);
-    var elementcontent = $(this).prop('nodeName');
-    refreshloggervalues();
-    datalogger("InputEvent",elementvalue,"username");
+$(document).on("change", "#input_username", function() {
+	var elementvalue = $(this).val();
+	//var elementdescription = elementvalue.toString().substring(0,500);
+	var elementcontent = $(this).prop("nodeName");
+	refreshloggervalues();
+	datalogger("InputEvent", elementvalue, "username");
 });
-$(document).on("change","#input_class",function(){
-    var elementvalue = $(this).val();
-    //var elementdescription = elementvalue.toString().substring(0,500);
-    var elementcontent = $(this).prop('nodeName');
-    refreshloggervalues();
-    datalogger("InputEvent",elementvalue,"class");
+$(document).on("change", "#input_class", function() {
+	var elementvalue = $(this).val();
+	//var elementdescription = elementvalue.toString().substring(0,500);
+	var elementcontent = $(this).prop("nodeName");
+	refreshloggervalues();
+	datalogger("InputEvent", elementvalue, "class");
 });
-$(document).on("change","#inputBehavior",function(){
-    var elementvalue = $(this).val();
-    //var elementdescription = elementvalue.toString().substring(0,500);
-    var elementcontent = $(this).prop('nodeName');
-    refreshloggervalues();
-    datalogger("InputEvent",elementvalue,"inputbehavior");
+$(document).on("change", "#inputBehavior", function() {
+	var elementvalue = $(this).val();
+	//var elementdescription = elementvalue.toString().substring(0,500);
+	var elementcontent = $(this).prop("nodeName");
+	refreshloggervalues();
+	datalogger("InputEvent", elementvalue, "inputbehavior");
 });
+/*
 $(document).on("change","#q",function(){
     var elementvalue = $(this).val();
     //var elementdescription = elementvalue.toString().substring(0,500);
@@ -288,3 +310,4 @@ $(document).on("change","#q",function(){
     refreshloggervalues();
     datalogger("InputEvent",elementvalue,"q");
 });
+*/
